@@ -20,6 +20,16 @@ program
   })
 
 program
+  .command('create')
+  .description('create ttk server-side project')
+  .alias('create')
+  .action(function (params) {
+    console.log('params', params)
+    func.serverside(params)
+  })
+
+
+program
   .command('app')
   .description('create app files')
   .alias('a')
