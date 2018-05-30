@@ -1,7 +1,7 @@
 {
   "name": "ttk-tool-serverside",
   "version": "1.1.12",
-  "description": "```\r sudo npm i -g ttk-tool\r ```\r ###创建ttk serverside projeck",
+  "description": "\r sudo npm i -g ttk-tool-serverside\r \r ###创建ttk serverside projeck",
   "main": "index.js",
   "scripts": {
     "build": "babel -d lib/ src/",
