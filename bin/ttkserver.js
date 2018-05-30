@@ -22,7 +22,7 @@ program
 program
   .command('create')
   .description('create ttk server-side project')
-  .alias('create')
+  .alias('ct')
   .action(function (params) {
     console.log('params', params)
     func.serverside(params)
