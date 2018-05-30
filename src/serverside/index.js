@@ -9,15 +9,8 @@ import { mkdir, copyFile, getInput, inputYN, createPackageFile, checkYarn } from
 const { join, basename } = path
 const installPackge = 'ttk_server_helloword'
 
-const basics = [
-    'ttk-edf-app-portal',
-    'ttk-edf-app-login',
-    'ttk-edf-app-root',
-    'ttk-edf-app-home',
-    'ttk-edf-app-portal-menu'
-]
 
-async function website (projectName) {
+async function serverside (projectName) {
     console.log('开始创建')
     if( typeof(projectName) != 'string' ){
         projectName = await getInput('请输入项目名称：')
@@ -66,4 +59,4 @@ async function website (projectName) {
     console.log(chalk.yellowBright(`安装依赖完成！ \n\n请执行以下命令\n\ncd ${projectName} \n\nnpm start`))
     process.exit()
 }
-export default website
+export default serverside
