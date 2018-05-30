@@ -40,10 +40,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thethreekingdoms/ttk-tools.git"
+    "url": "git+https://github.com/lvaolin/ttk-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/thethreekingdoms/ttk-tools/issues"
+    "url": "https://github.com/lvaolin/ttk-tools/issues"
   },
-  "homepage": "https://github.com/thethreekingdoms/ttk-tools#readme"
+  "homepage": "https://github.com/lvaolin/ttk-tools#readme"
 }
