@@ -7,10 +7,10 @@ import through from 'through2'
 import { mkdir, copyFile, getInput, inputYN, createPackageFile, checkYarn } from '../utils'
 
 const { join, basename } = path
-const installPackge = 'ttk-server-parent'
+const installPackge = 'ttk-server-microservice'
 
 
-async function serverside (projectName) {
+async function microservice (projectName) {
     console.log('开始创建')
     if( typeof(projectName) != 'string' ){
         projectName = await getInput('请输入项目名称：')
@@ -59,4 +59,4 @@ async function serverside (projectName) {
     console.log(chalk.yellowBright(`安装依赖完成！ \n\n请执行以下命令\n\ncd ${projectName} \n\nnpm start`))
     process.exit()
 }
-export default serverside
+export default microservice

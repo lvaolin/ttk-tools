@@ -27,7 +27,14 @@ program
     console.log('params', params)
     func.serverside(params)
   })
-
+  program
+  .command('create-microservice')
+  .description('create ttk server-side ervice project')
+  .alias('cms')
+  .action(function (params) {
+    console.log('params', params)
+    func.microservice(params)
+  })
 
 program
   .command('app')

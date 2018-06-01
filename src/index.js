@@ -7,5 +7,7 @@ import cloneApps from './cloneApps'
 import reset from './reset'
 import init from './init'
 import serverside from './serverside'
+import microservice from './microservice'
 
-export default { website, clone, compile, createApp, update, cloneApps, reset, init,serverside }
+
+export default { website, clone, compile, createApp, update, cloneApps, reset, init,serverside,microservice }
