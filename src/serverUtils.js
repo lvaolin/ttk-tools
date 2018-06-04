@@ -6,29 +6,26 @@ const fs = require('fs');
 var BusinessName = "Businessline"; //业务线名称
 var businessName = "businessline";
 var moduleName="modulename"; //模块名称
-var serviceName="businessline-modulename"; //微服务名称
+var serviceName=businessName+"-"+moduleName; //微服务名称
 
 
-var path1 = "src/ttk/tax-sb";
-var path1_replace = "src/ttk/service/"+serviceName;
-var path2 = path1_replace+"/tax-sb-interface";
-var path2_replace = path1_replace+"/"+serviceName+"-interface";
-var path3 = path2_replace+"/src/main/java/com/ttk/tax";
-var path3_replace = path2_replace+"/src/main/java/com/ttk/"+businessName;
-var path4 = path3_replace+"/sb";
-var path4_replace = path3_replace+"/"+moduleName;
+//addServiceFromTemplate();
 
+export function addServiceFromTemplate(businessName_,moduleName_){
 
-var path2_service = path1_replace+"/tax-sb-service";
-var path2_service_replace = path1_replace+"/"+serviceName+"-service";
-var path3_service = path2_service_replace+"/src/main/java/com/ttk/tax";
-var path3_service_replace = path2_service_replace+"/src/main/java/com/ttk/"+businessName;
-var path4_service = path3_service_replace+"/sb";
-var path4_service_replace = path3_service_replace+"/"+moduleName;
+    if(!businessName){
+        console.log("请输入业务线名称（英文）");
+    }
 
-replaceFile();
+    if(!moduleName){
+        console.log("请输入模块名称（英文）");
+    }
 
-function replaceFile(){
+    businessName = businessName_;
+    BusinessName = businessName.substring(0,1).toUpperCase() + businessName.substring(1);
+    moduleName = moduleName_;
+    serviceName = businessName+"-"+moduleName;
+
     console.log("正在进行文件复制和文件内容占位符替换。");
     gulp.src('src/microservice-template/**/*')
         .pipe(replace('sb', moduleName))//替换文件中的模块占位符
@@ -41,6 +38,26 @@ function replaceFile(){
 }
 
 function callback(){
+
+
+    var path1 = "src/ttk/tax-sb";
+    var path1_replace = "src/ttk/service/"+serviceName;
+    var path2 = path1_replace+"/tax-sb-interface";
+    var path2_replace = path1_replace+"/"+serviceName+"-interface";
+    var path3 = path2_replace+"/src/main/java/com/ttk/tax";
+    var path3_replace = path2_replace+"/src/main/java/com/ttk/"+businessName;
+    var path4 = path3_replace+"/sb";
+    var path4_replace = path3_replace+"/"+moduleName;
+
+
+    var path2_service = path1_replace+"/tax-sb-service";
+    var path2_service_replace = path1_replace+"/"+serviceName+"-service";
+    var path3_service = path2_service_replace+"/src/main/java/com/ttk/tax";
+    var path3_service_replace = path2_service_replace+"/src/main/java/com/ttk/"+businessName;
+    var path4_service = path3_service_replace+"/sb";
+    var path4_service_replace = path3_service_replace+"/"+moduleName;
+
+
     console.log("正在进行interfce包名替换。");
     fs.renameSync(path1,path1_replace);
     fs.renameSync(path2,path2_replace);
