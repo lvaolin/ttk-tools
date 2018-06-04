@@ -1,6 +1,6 @@
 {
   "name": "ttk-tool-serverside",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "\r sudo npm i -g ttk-tool-serverside\r \r ###创建ttk serverside projeck",
   "main": "index.js",
   "scripts": {
