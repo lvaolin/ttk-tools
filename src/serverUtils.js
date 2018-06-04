@@ -1,5 +1,6 @@
-var gulp = require('gulp');
-var replace = require('gulp-replace');
+'use strict'
+
+var replace = require('replace');
 var vfs = require('vinyl-fs');
 const fs = require('fs');
 
@@ -9,17 +10,20 @@ var businessName = "businessline";
 var moduleName="modulename"; //模块名称
 var serviceName=businessName+"-"+moduleName; //微服务名称
 
+var temppath = "/Users/lvaolin/code_github.com/ttk-server-parent";
 
 //addServiceFromTemplate();
 
-export function addServiceFromTemplate(businessName_,moduleName_){
+ export function addServiceFromTemplate(businessName_,moduleName_){
 
     if(!businessName){
         console.log("请输入业务线名称（英文）");
+        return ;
     }
 
     if(!moduleName){
         console.log("请输入模块名称（英文）");
+        return ;
     }
 
     businessName = businessName_;
@@ -28,27 +32,41 @@ export function addServiceFromTemplate(businessName_,moduleName_){
     serviceName = businessName+"-"+moduleName;
 
     console.log("正在进行文件复制和文件内容占位符替换。");
-    try {
-        vfs.src('./src/microservice-template/**/*')
-            .pipe(replace('sb', moduleName))//替换文件中的模块占位符
-            .pipe(replace('tax', businessName))//替换文件中的业务线占位符
-            .pipe(replace('Tax', BusinessName))//替换文件中的业务线占位符
-            .pipe(vfs.dest('./src/ttk/service/'))
-            .on('end', callback);
 
-    }catch (e){
-        console.log("有异常");
-    }
-
-
+    vfs.src(temppath+'/src/microservice-template/**/*')
+        .pipe(vfs.dest(temppath+'/src/ttk/service/'))
+        .on('end', callback);
 
 }
 
 function callback(){
 
+    replace({
+        regex: "sb",
+        replacement: moduleName,
+        paths: [temppath+'/src/ttk/service/'],
+        recursive: true,
+        silent: true,
+    });
 
-    var path1 = "./src/ttk/service/tax-sb";
-    var path1_replace = "./src/ttk/service/"+serviceName;
+    replace({
+        regex: "tax",
+        replacement: businessName,
+        paths: [temppath+'/src/ttk/service/'],
+        recursive: true,
+        silent: true,
+    });
+
+    replace({
+        regex: "Tax",
+        replacement: BusinessName,
+        paths: [temppath+'/src/ttk/service/'],
+        recursive: true,
+        silent: true,
+    });
+
+    var path1 = temppath+"/src/ttk/service/tax-sb";
+    var path1_replace = temppath+"/src/ttk/service/"+serviceName;
     var path2 = path1_replace+"/tax-sb-interface";
     var path2_replace = path1_replace+"/"+serviceName+"-interface";
     var path3 = path2_replace+"/src/main/java/com/ttk/tax";
@@ -80,4 +98,7 @@ function callback(){
     console.log("正在进行service类名替换。");
     fs.renameSync(path4_service_replace+"/impl/TaxDiscoveryServiceImpl.java",path4_service_replace+"/impl/"+BusinessName+"DiscoveryServiceImpl.java");
     fs.renameSync(path4_service_replace+"/impl/TaxHealthCheckServiceImpl.java",path4_service_replace+"/impl/"+BusinessName+"HealthCheckServiceImpl.java");
+
 }
+
+
