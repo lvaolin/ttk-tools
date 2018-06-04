@@ -10,7 +10,8 @@ var businessName = "businessline";
 var moduleName = "modulename"; //模块名称
 var serviceName = businessName + "-" + moduleName; //微服务名称
 
-var temppath = "/Users/lvaolin/code_github.com/ttk-server-parent";
+var temppath = process.cwd();
+console.log('当前业务操作base路径：'+temppath);
 
 
 export  function addServiceFromTemplate(businessName_, moduleName_) {
