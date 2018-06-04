@@ -20,23 +20,6 @@ program
   })
 
 program
-  .command('create')
-  .description('create ttk server-side project')
-  .alias('ct')
-  .action(function (params) {
-    console.log('params', params)
-    func.serverside(params)
-  })
-  program
-  .command('create-microservice')
-  .description('create ttk server-side ervice project')
-  .alias('cms')
-  .action(function (params) {
-    console.log('params', params)
-    func.microservice(params)
-  })
-
-program
   .command('app')
   .description('create app files')
   .alias('a')
@@ -105,6 +88,34 @@ program
   .action(function(path, ...apps){
     func.init()
   })
+
+
+program
+    .command('serverCreateParent')
+    .description('创建后端开发父工程（包含一个默认的微服务模板）')
+    .alias('scp')
+    .action(function (params) {
+        console.log('params', params)
+        func.serverCreateParent(params)
+    })
+program
+    .command('serverAddMicroservice')
+    .description('增加一个微服务,可指定模板名称，无指定则使用默认模板')
+    .alias('sam')
+    .action(function (params) {
+        console.log('params', params)
+        func.serverAddMicroservice(params)
+    })
+
+program
+    .command('serverDownloadMicroserviceTemplate')
+    .description('下载指定名称的微服务模板')
+    .alias('sdmt')
+    .action(function (params) {
+        console.log('params', params)
+        func.serverDownloadMicroserviceTemplate(params)
+    })
+
 program.parse(process.argv)
 
 

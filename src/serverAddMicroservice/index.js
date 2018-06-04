@@ -10,7 +10,7 @@ const { join, basename } = path
 const installPackge = 'ttk-server-microservice'
 
 
-async function microservice (projectName) {
+async function serverAddMicroservice (projectName) {
     console.log('开始创建')
     if( typeof(projectName) != 'string' ){
         projectName = await getInput('请输入项目名称：')
@@ -42,21 +42,10 @@ async function microservice (projectName) {
             `!./${projectName}/node_modules/${installPackge}/node_modules`
         ]
     )
-    console.log(chalk.greenBright('成功创建项目'))
-    const YNres = await inputYN()
-    if( !YNres ) {
-        return process.exit()
-    }
-    console.log(chalk.gray('安装依赖 yarn install....'))
-    // const res4 = await CMD('npm install', {cwd: join(process.cwd(), projectName)})
-    const res4 = await spawn.sync('yarn', ['install'], {cwd: join(process.cwd(), projectName), stdio: 'inherit' })
-    if( res4.error ) {
-        console.log(chalk.redBright(res4.error))
-        console.log(chalk.redBright('安装依赖失败， 请在项目根目录下以管理员身份运行：yarn install'))
-        process.exit()
-        return
-    }
-    console.log(chalk.yellowBright(`安装依赖完成！ \n\n请执行以下命令\n\ncd ${projectName} \n\nnpm start`))
+    console.log(chalk.greenBright('成功创建微服务'))
+    
+   //占位符替换
+
     process.exit()
 }
-export default microservice
+export default serverAddMicroservice

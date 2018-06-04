@@ -1,6 +1,6 @@
 {
   "name": "ttk-tool-serverside",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "\r sudo npm i -g ttk-tool-serverside\r \r ###创建ttk serverside projeck",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,8 @@
     "chalk": "^2.3.2",
     "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
+    "gulp": "^3.9.1",
+    "gulp-replace": "^1.0.0",
     "request": "^2.85.0",
     "through2": "^2.0.3",
     "vinyl-fs": "^3.0.2",
