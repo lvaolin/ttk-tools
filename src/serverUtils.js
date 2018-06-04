@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var replace = require('gulp-replace');
+var vfs = require('vinyl-fs');
 const fs = require('fs');
 
 
@@ -27,13 +28,18 @@ export function addServiceFromTemplate(businessName_,moduleName_){
     serviceName = businessName+"-"+moduleName;
 
     console.log("正在进行文件复制和文件内容占位符替换。");
-    console.log(pwd);
-    gulp.src('./src/microservice-template/**/*')
-        .pipe(replace('sb', moduleName))//替换文件中的模块占位符
-        .pipe(replace('tax', businessName))//替换文件中的业务线占位符
-        .pipe(replace('Tax', BusinessName))//替换文件中的业务线占位符
-        .pipe(gulp.dest('./src/ttk/service/'))
-        .on('end', callback);
+    try {
+        vfs.src('./src/microservice-template/**/*')
+            .pipe(replace('sb', moduleName))//替换文件中的模块占位符
+            .pipe(replace('tax', businessName))//替换文件中的业务线占位符
+            .pipe(replace('Tax', BusinessName))//替换文件中的业务线占位符
+            .pipe(vfs.dest('./src/ttk/service/'))
+            .on('end', callback);
+
+    }catch (e){
+        console.log("有异常");
+    }
+
 
 
 }
