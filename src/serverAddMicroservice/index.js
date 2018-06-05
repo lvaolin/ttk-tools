@@ -21,7 +21,7 @@ async function serverAddMicroservice (businessName,moduleName) {
      }
      console.log('检查该微服务是否已经存在...')
      var temppath = process.cwd();
-     var path = temppath + '/src/ttk/service/'+businessName+'-'+moduleName;
+     var path = temppath + '/src/'+businessName+'/service/'+businessName+'-'+moduleName;
 
      if( fs.existsSync(path) === true ){
          console.log(chalk.redBright('由于目录'+path+'已经存在，请删除后或者修改微服务名称后重新运行。'));
