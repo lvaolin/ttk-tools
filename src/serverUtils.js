@@ -16,26 +16,27 @@ console.log('当前业务操作base路径：'+temppath);
 
 export  function addServiceFromTemplate(businessName_, moduleName_) {
 
-    if (!businessName) {
-        console.log("请输入业务线名称（英文）");
-        return;
-    }
+      if (!businessName) {
+          console.log("请输入业务线名称（英文）");
+          return;
+      }
 
-    if (!moduleName) {
-        console.log("请输入模块名称（英文）");
-        return;
-    }
+      if (!moduleName) {
+          console.log("请输入模块名称（英文）");
+          return;
+      }
 
-    businessName = businessName_;
-    BusinessName = businessName.substring(0, 1).toUpperCase() + businessName.substring(1);
-    moduleName = moduleName_;
-    serviceName = businessName + "-" + moduleName;
+      businessName = businessName_;
+      BusinessName = businessName.substring(0, 1).toUpperCase() + businessName.substring(1);
+      moduleName = moduleName_;
+      serviceName = businessName + "-" + moduleName;
 
-    console.log("正在进行文件复制和文件内容占位符替换。");
+      console.log("正在进行文件复制和文件内容占位符替换。");
 
-    vfs.src(temppath + '/src/microservice-template/**/*')
-        .pipe(vfs.dest(temppath + '/src/ttk/service/'))
-        .on('end', callback);
+      vfs.src(temppath + '/src/microservice-template/**/*')
+          .pipe(vfs.dest(temppath + '/src/ttk/service/'))
+          .on('end', callback);
+
 }
 
 function callback() {
@@ -98,5 +99,6 @@ function callback() {
     fs.renameSync(path4_service_replace + "/impl/TaxDiscoveryServiceImpl.java", path4_service_replace + "/impl/" + BusinessName + "DiscoveryServiceImpl.java");
     fs.renameSync(path4_service_replace + "/impl/TaxHealthCheckServiceImpl.java", path4_service_replace + "/impl/" + BusinessName + "HealthCheckServiceImpl.java");
 
+    console.log("微服务创建成功,位置："+path1_replace);
 }
 

@@ -13,7 +13,7 @@ const installPackge = 'ttk-server-parent'
 async function serverCreateParent (projectName) {
     console.log('开始创建')
     if( typeof(projectName) != 'string' ){
-        projectName = await getInput('请输入项目名称：')
+        projectName = await getInput('请输入项目存放目录名称：')
         console.log(projectName)
     }
     const res = await mkdir(projectName)
@@ -25,7 +25,6 @@ async function serverCreateParent (projectName) {
     await checkYarn()
     console.log(chalk.gray('下载中..........'))
     const createPackageJson = await createPackageFile(projectName)
-    // const res2 =await CMD(`npm i ${installPackge}`, {cwd: join(process.cwd(), projectName)})
     const res2 = await spawn.sync('yarn', ['add', installPackge], {cwd: join(process.cwd(), projectName), stdio: 'inherit' })
     console.log('res2', res2.error)
     if( res2.error || res2.status != 0 ){
@@ -43,20 +42,6 @@ async function serverCreateParent (projectName) {
         ]
     )
     console.log(chalk.greenBright('成功创建项目'))
-    const YNres = await inputYN()
-    if( !YNres ) {
-        return process.exit()
-    }
-    console.log(chalk.gray('安装依赖 yarn install....'))
-    // const res4 = await CMD('npm install', {cwd: join(process.cwd(), projectName)})
-    const res4 = await spawn.sync('yarn', ['install'], {cwd: join(process.cwd(), projectName), stdio: 'inherit' })
-    if( res4.error ) {
-        console.log(chalk.redBright(res4.error))
-        console.log(chalk.redBright('安装依赖失败， 请在项目根目录下以管理员身份运行：yarn install'))
-        process.exit()
-        return
-    }
-    console.log(chalk.yellowBright(`安装依赖完成！ \n\n请执行以下命令\n\ncd ${projectName} \n\nnpm start`))
-    process.exit()
+
 }
 export default serverCreateParent
