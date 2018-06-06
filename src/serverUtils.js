@@ -32,14 +32,16 @@ export  function addServiceFromTemplate(businessName_, moduleName_) {
       serviceName = businessName + "-" + moduleName;
 
       console.log("正在进行文件复制和文件内容占位符替换。");
-      var path = temppath + '/src/'+businessName+'/service/'+businessName+'-'+moduleName;
+      var path = temppath + '/src/'+businessName;
       if( fs.existsSync(path) === true ){
-          vfs.src(temppath + '/src/microservice-template/tax/server/tax-sb/**/*')
-              .pipe(vfs.dest(temppath + '/src/'+businessName+'/service/'+serviceName))
+          console.log("父目录已存在，直接增加服务。");
+          vfs.src(temppath + '/src/microservice-template/tax/service/tax-sb/**/*')
+              .pipe(vfs.dest(temppath + '/src/'+businessName+'/service/'+serviceName+'/'))
               .on('end', callbackForExist);
       }else{
+          console.log("父目录不存在，创建骨架。");
           vfs.src(temppath + '/src/microservice-template/tax/**/*')
-              .pipe(vfs.dest(temppath + '/src/'+businessName))
+              .pipe(vfs.dest(temppath + '/src/'+businessName+'/'))
               .on('end', callback);
       }
 
